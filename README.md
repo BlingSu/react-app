@@ -122,3 +122,53 @@ touch ./dist/index.html
 </html>
 ```
 打开index.html可以看到输出  hello world
+
+## Babel
+
+[把es6以上的代码编译成es5，可以参考这个](https://babeljs.io/)
+
+es2015 解析es6, state-0 解析es7 core用于api转码
+```bash
+npm i babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-0 --save-dev
+```
+
+新建babel配置文件
+```bash
+touch .babelrc
+```
+
+.babelrc
+
+```
+{
+    "presets": [
+        "es2015",
+        "react",
+        "stage-0"
+    ],
+    "plugins": []
+}
+```
+
+修改webpack.dev.config.js,添加babel-loader
+
+```js
+module: {
+    rules: [
+        {
+            test: /\.js$/,
+            use: ['babel-loader?cacheDirectory=true'],
+            include: path.join(__diranme, 'src')
+        }
+    ]
+}
+```
+
+将 src/index.js 的代码换成es6
+
+```js
+const page = str => { document.getElementById('app').innerHTML = str }
+
+page(`hello webpack...`)
+```
+执行 webpack --config webpack.dev.config.js

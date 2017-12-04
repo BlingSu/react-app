@@ -67,7 +67,9 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-document.getElementById('app').innerHTML = `hello world`
+const page = str => { document.getElementById('app').innerHTML = str }
+
+page(`hello webpack...`)
 
 /***/ })
 /******/ ]);
