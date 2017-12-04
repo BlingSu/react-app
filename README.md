@@ -208,9 +208,9 @@ Hello 组件
 import React, {Component} from 'react'
 export default class Hello extends Component {
     render() {
-        retrun (
+        return (
             <div>
-                Hello, React~~
+                Hello,React!
             </div>
         )
     }
@@ -225,8 +225,7 @@ import ReactDOM from 'react-dom'
 import Hello from './component/Hello/Hello'
 
 ReactDOM.render(
-    <Hello />, document.getElementById('app')
-)
+    <Hello/>, document.getElementById('app'))
 
 ```
 
