@@ -232,7 +232,120 @@ ReactDOM.render(
 简化打包命令
 
 ```bash
-    dev: "webpack --config webpack.dev.config.js"
+    dev-build: "webpack --config webpack.dev.config.js"
 ```
 
-执行 npm run dev 就能看到效果了
+执行 npm run dev-build 就能看到效果了
+
+## react-router
+
+```bash
+npm i react-router-dom --save
+```
+
+新建两个组件
+
+```bash
+cd src
+mkdir Home && mkdir About
+touch Home/Home.js && touch About/About.js
+```
+
+Home.js
+
+```js
+import React, {Component} from 'react'
+
+export default class About extends Component {
+  render () {
+    return (
+      <div>
+        About page
+      </div>
+    )
+  }
+}
+```
+
+About.js
+
+```js
+import React, {Component} from 'react'
+
+export default class Home extends Component {
+  render () {
+    return (
+      <div>
+        home page
+      </div>
+    )
+  }
+}
+```
+
+[根据文档，路由配置](http://reacttraining.cn/web/guides/quick-start)
+
+```js
+import React from 'react'
+
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+
+import Home from '../pages/Home/Home'
+import About from '../pages/About/About'
+
+const getRouter = () => (
+  <Router>
+    <div>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+      </Switch>
+    </div>
+  </Router>
+)
+
+export default getRouter
+```
+
+修改src/index.js的内容
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Hello from './component/Hello/Hello'
+
+import getRouter from './router/router'
+
+ReactDOM.render(
+    getRouter(), document.getElementById('app'))
+```
+
+还得在配置一个服务器，打包完点击才有跳转的效果～
+
+## webpack-dev-server
+
+```bash
+npm i webpack-dev-server --save-dev
+```
+
+修改webpack.dev.config.js 添加webpack-dev-server配置
+
+```js
+devServer: {
+    contentBase: path.join(__dirname, './dist')
+    // contentbase 指向url的根目录
+}
+```
+
+然后需要使用 webpack-dev-server --config webpack.dev.config.js来启动
+所以需要在package.json在配置一个启动命令
+
+```js
+    "start": "webpack-dev-server --config webpack.dev.config.js"
+```
+
+执行 npm run start 就可以看到效果啦
