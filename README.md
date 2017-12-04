@@ -155,11 +155,11 @@ touch .babelrc
 ```js
 module: {
     rules: [
-        {
-            test: /\.js$/,
-            use: ['babel-loader?cacheDirectory=true'],
-            include: path.join(__diranme, 'src')
-        }
+      {
+        test: /\.js$/,
+        use: ['babel-loader?cacheDirectory=true'],
+        include: path.join(__dirname, 'src')
+      }
     ]
 }
 ```
@@ -167,8 +167,73 @@ module: {
 将 src/index.js 的代码换成es6
 
 ```js
-const page = str => { document.getElementById('app').innerHTML = str }
+const pageContent = str => { document.getElementById('app').innerHTML = str }
 
-page(`hello webpack...`)
+pageContent(`hello webpack...`)
 ```
 执行 webpack --config webpack.dev.config.js
+
+
+## react
+
+```bash
+npm i react react-dom --save
+```
+
+修改src/index.js 的内容
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(
+    <h1>Hello, world</h1>,
+    document.getElementById('app')
+)
+```
+
+执行 webpack --config webpack.dev.config.js 可以看效果
+
+### 组件化
+
+```bash
+cd src && mkdir component
+cd component && mkdir Hello
+cd Hello && touch Hello.js
+```
+
+Hello 组件
+
+```js
+import React, {Component} from 'react'
+export default class Hello extends Component {
+    render() {
+        retrun (
+            <div>
+                Hello, React~~
+            </div>
+        )
+    }
+}
+```
+
+修改src/index.js，引入组件
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Hello from './component/Hello/Hello'
+
+ReactDOM.render(
+    <Hello />, document.getElementById('app')
+)
+
+```
+
+简化打包命令
+
+```bash
+    dev: "webpack --config webpack.dev.config.js"
+```
+
+执行 npm run dev 就能看到效果了

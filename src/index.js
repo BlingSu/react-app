@@ -1,3 +1,6 @@
-const page = str => { document.getElementById('app').innerHTML = str }
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Hello from './component/Hello/Hello';
 
-page(`hello webpack...`)
+ReactDOM.render(
+    <Hello/>, document.getElementById('app'))
