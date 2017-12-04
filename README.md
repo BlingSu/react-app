@@ -51,3 +51,14 @@
           Bundle.js
           router.js
 ```
+
+## 初始项目
+
+```git
+mkdir react
+
+cd react
+
+npm init
+
+```
