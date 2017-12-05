@@ -348,3 +348,32 @@ devServer: {
 ```
 
 执行 npm run start 就可以看到效果啦
+
+> webpack-dev-server 配置
+* color: 彩色日志
+* historyApiFallback: 404重定index.html
+* proxy: 代理
+* hot 热加载
+* host
+```js
+proxy: {
+  '/api': 'http://localhost:9527'
+}
+```
+
+修改webpck.dev.config的配置:
+
+```js
+devServer: {
+  port: 8080,
+  contentBase: path.join(__dirname, './dist'),
+  historyApiFallback: true
+}
+```
+
+如果要在控制台打出彩色的话可以这么配置
+```bash
+"dev": "webpack-dev-server --config webpack.dev.config.js --color --progress"
+```
+
+执行 npm run start 可以看到打包的输出以及解决/about刷新404的问题。
