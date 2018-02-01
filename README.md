@@ -377,3 +377,28 @@ devServer: {
 ```
 
 执行 npm run start 可以看到打包的输出以及解决/about刷新404的问题。
+
+### 热模块替换
+
+package.json 增加 --hot
+```bash
+"dev": "webpack-dev-server --config webpack.dev.config.js --color --progress -hot"
+```
+
+src/index.js 增加 module.hot.accept(). 当模块更新的时候，通知index.js
+
+```js
+import React from 'react'
+import ReactDom from 'react-dom'
+
+import getRouter from './router/router'
+
+if (module.hot) {
+  module.hot.accept()
+}
+
+ReactDom.render(
+  getRouter(), document.getElementById('app')
+)
+
+```
