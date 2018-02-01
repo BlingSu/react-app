@@ -382,7 +382,7 @@ devServer: {
 
 package.json 增加 --hot
 ```bash
-"dev": "webpack-dev-server --config webpack.dev.config.js --color --progress -hot"
+"dev": "webpack-dev-server --config webpack.dev.config.js --color --progress --hot"
 ```
 
 src/index.js 增加 module.hot.accept(). 当模块更新的时候，通知index.js
