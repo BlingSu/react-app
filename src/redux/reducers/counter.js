@@ -1,4 +1,4 @@
-import {INCREMENT, DECREMENT, RESET} from 'redux/actions/counter'
+import {INCREMENT, DECREMENT, RESET} from '../actions/counter'
 
 const initState = {
   count: 0

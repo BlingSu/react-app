@@ -1,6 +1,7 @@
-import {createStore} from 'redux'
-import combinReducers from './reducers.js'
+import {createStore, applyMiddleware} from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import combineReducers from './reducers.js'
 
-let store = createStore(combinReducers)
+let store = createStore(combineReducers, applyMiddleware(thunkMiddleware))
 
 export default store
