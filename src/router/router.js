@@ -1,8 +1,8 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 
-import Home from '../component/Home/Home'
-import Page from '../component/Page/Page'
+import Home from 'component/Home/Home'
+import Page from 'component/Page/Page'
 
 
 const getRouter = () => (

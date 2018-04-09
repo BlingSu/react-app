@@ -23,5 +23,11 @@ module.exports = {
     contentBase: path.join(__dirname, './dist'),
     historyApiFallback: true,
     host: '0.0.0.0'
+  },
+  resolve: {
+    alias: {
+      component: path.join(__dirname, 'src/component'),
+      router: path.join(__dirname, 'src/router')
+    }
   }
 }
