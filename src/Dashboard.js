@@ -19,12 +19,8 @@ function home3() {
 
 
 class Dashboard extends React.Component{
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    console.log(this.props)
+    const match = this.props.match
     const redirectToLogin = <Redirect to="/login"></Redirect>
     const app = (
       <div>
@@ -32,18 +28,18 @@ class Dashboard extends React.Component{
         { this.props.isAuth ? <button onClick={this.props.logout}>注销</button> : null }
         <ul>
           <li>
-            <Link to="/dashboard">home1</Link>
+            <Link to={`${match.url}/`}>home1</Link>
           </li>
           <li>
-            <Link to="/dashboard/home2">home2</Link>
+            <Link to={`${match.url}/home2`}>home2</Link>
           </li>
           <li>
-            <Link to="/dashboard/home3">home3</Link>
+            <Link to={`${match.url}`}>home3</Link>
           </li>
         </ul>
-        <Route path="/dashboard/" exact component={App}></Route>
-        <Route path="/dashboard/home2" component={home2}></Route>
-        <Route path="/dashboard/home3" component={home3}></Route>
+        <Route path={`${match.url}/`} exact component={App}></Route>
+        <Route path={`${match.url}/home2`} component={home2}></Route>
+        <Route path={`${match.url}/home3`} component={home3}></Route>
       </div>
     )
     return this.props.isAuth ? app : redirectToLogin
