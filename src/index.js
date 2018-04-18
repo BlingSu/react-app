@@ -4,9 +4,12 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
+
+import Login from './container/login/login.js'
+import Register from './container/register/register.js'
+import AuthRoute from './component/authroute/authroute'
+
 import reducers from './reducer'
-import Dashboard from './Dashboard.js'
-import Auth from './Auth.js'
 import './config'
 
 const store = createStore(reducers, compose(
@@ -14,14 +17,19 @@ const store = createStore(reducers, compose(
     window.devToolsExtension ? window.devToolsExtension(): f => f
   ))
 
+  function Boss() {
+    return <h2>boss ......</h2>
+  }
+
 ReactDom.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route path="/login" exact component={Auth}></Route>
-        <Route path="/dashboard" component={Dashboard}></Route>
-        <Redirect to="dashboard"></Redirect>
-      </Switch>
+      <div>
+        <AuthRoute></AuthRoute>
+        <Route path="/boss" component={Boss}></Route>
+        <Route path='/login' component={Login}></Route>
+        <Route path='/register' component={Register}></Route>
+      </div>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
