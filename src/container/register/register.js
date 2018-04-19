@@ -17,7 +17,7 @@ class Register extends React.Component{
       user: '',
       pwd: '',
       repeatpwd: '',
-      type: 'job_seeker'
+      type: 'genius'
     }
     this.handleRegister = this.handleRegister.bind(this)
   }
@@ -49,8 +49,8 @@ class Register extends React.Component{
           </List>
           <WhiteSpace />
           <RadioItem
-            checked={this.state.type == 'job_seeker'}
-            onClick={()=>this.handleChange('type', 'job_seeker')}>求职者</RadioItem>
+            checked={this.state.type == 'genius'}
+            onClick={()=>this.handleChange('type', 'genius')}>求职者</RadioItem>
           <RadioItem
             checked={this.state.type == 'boss'}
             onClick={()=>this.handleChange('type', 'boss')}>老板</RadioItem>
