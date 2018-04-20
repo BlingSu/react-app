@@ -35,12 +35,12 @@ export function user(state=initState, action) {
   }
 }
 
-function errorMsg(msg) {
-  return {type: ERROR_MSG, msg: msg}
+function authSuccess(obj){
+	const {pwd,...data} = obj
+	return {type: AUTH_SUCCESS, payload:data}
 }
-function authSuccess(obj) {
-  const {pwd, ...data} = obj
-  return {type: AUTH_SUCCESS, payload: data}
+function errorMsg(msg){
+	return { msg, type:ERROR_MSG }
 }
 // function registerSuccess(data) {
 //   return {type: REGISTER_SUCCESS, payload: data}
@@ -50,16 +50,16 @@ function authSuccess(obj) {
 // }
 
 export function update(data) {
-  return dispatch => {
-    axios.post('/user/update', data)
-    .then(res => {
-      if (res.status == 200 && res.data.code === 0) {
-        dispatch(authSuccess(res.data.data))
-      } else {
-        dispatch(errorMsg(res.data.msg))
-      }
-    })
-  }
+	return dispatch=>{
+		axios.post('/user/update',data)
+			.then(res=>{
+				if (res.status == 200 && res.data.code === 0) {
+					dispatch(authSuccess(res.data.data))
+				} else {
+					dispatch(errorMsg(res.data.msg))
+				}
+			})
+	}
 }
 
 export function loadData(userinfo) {
