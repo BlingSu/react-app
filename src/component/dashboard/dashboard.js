@@ -4,10 +4,8 @@ import { connect } from 'react-redux'
 import NavLinkBar from '../navlink/navlink'
 import { Switch, Route } from 'react-router-dom'
 import Boss from '../../component/boss/boss'
+import Genius from '../../component/genius/genius'
 
-function Genius() {
-  return <h2>Genius shouye </h2>
-}
 function Msg() {
   return <h2>msg shouye </h2>
 }
@@ -22,7 +20,6 @@ class Dashboard extends React.Component {
 
   render() {
 		const { pathname } = this.props.location
-		console.log(pathname, '11')
     const user = this.props.user
     const navList = [
 			{
