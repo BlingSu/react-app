@@ -1,12 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Result, List, WhiteSpace } from 'antd-mobile'
+import browserCookie from 'browser-cookies'
 
 @connect(
   state => state.user
 )
 
 class User extends React.Component {
+  constructor(props){
+		super(props)
+		this.logout = this.logout.bind(this)
+	}
+	logout() {
+    console.log('logout')
+  }
   render() {
     const props = this.props
     const Item = List.Item
@@ -25,9 +33,9 @@ class User extends React.Component {
           </Item>
         </List>
         <WhiteSpace></WhiteSpace>
-        <List>
-          <Item>退出登录</Item>
-        </List>
+				<List>
+					<Item onClick={this.logout}>退出登录</Item>
+				</List>
       </div>
     ) : null
   }
