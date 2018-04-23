@@ -7,6 +7,7 @@ import {getRedirectPath} from '../util'
 const ERROR_MSG = 'ERROR_MSG'
 // const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
+const LOGO_OUT = 'LOGO_OUT'
 const LOAD_DATA = 'LOAD_DATA'
 
 const initState = {
@@ -26,6 +27,8 @@ export function user(state=initState, action) {
     //   return {...state, msg: '', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
     case AUTH_SUCCESS: 
       return {...state, msg: '', redirectTo: getRedirectPath(action.payload), ...action.payload}
+    case LOGO_OUT:
+      return {...initState, redirectTo: '/login'}
     case LOAD_DATA:
       return {...state, ...action.payload}
     case ERROR_MSG:
@@ -66,6 +69,9 @@ export function loadData(userinfo) {
   return {type: LOAD_DATA, payload: userinfo}
 }
 
+export function logoutSubmit() {
+  return {type: LOGO_OUT }
+}
 export function login({user, pwd}) {
   if (!user || !pwd) {
     return errorMsg('用户名和密码必须输入')
