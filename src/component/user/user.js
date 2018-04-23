@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Result, List, WhiteSpace } from 'antd-mobile'
+import { Result, List, WhiteSpace, Modal } from 'antd-mobile'
 import browserCookie from 'browser-cookies'
 
 @connect(
@@ -13,7 +13,14 @@ class User extends React.Component {
 		this.logout = this.logout.bind(this)
 	}
 	logout() {
-    console.log('logout')
+    const alert = Modal.alert
+    alert('注销', '确认退出登录吗？', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      {text: '确认', onPress: () => {
+        browserCookie.erase('userid')
+        window.location.href ='/login'
+      }}
+    ])
   }
   render() {
     const props = this.props
@@ -24,7 +31,7 @@ class User extends React.Component {
         <Result
           img={<img src={require(`../img/${props.avatar}.png`)} style={{width:50}}  alt="" />}
           title={props.user}
-          message={props.type == 'boss' ? props.company : null} />
+          message={props.type === 'boss' ? props.company : null} />
         <List renderHeader={() => '简介'}>
           <Item multipleLine>
             {props.title}

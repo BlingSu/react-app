@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Card, WhiteSpace, WingBlank } from 'antd-mobile'
+import { Card, WingBlank } from 'antd-mobile'
 
 class UserCard extends React.Component {
   static propTypes = {
@@ -19,11 +19,11 @@ class UserCard extends React.Component {
               thumb={require(`../img/${v.avatar}.png`)}
               extra={<span>{v.title}</span>}
             ></Header>
-            {v.type == 'boss' ? <div>公司:{v.company}</div> : null}
+            {v.type === 'boss' ? <div>公司:{v.company}</div> : null}
             <Body>{v.desc.split('\n').map(d => (
               <div key={d}>{d}</div>
             ))}</Body>
-            {v.type == 'boss' ? <div>{v.money}</div> : null}
+            {v.type === 'boss' ? <div>{v.money}</div> : null}
           </Card> : null
         ))}
       </WingBlank>

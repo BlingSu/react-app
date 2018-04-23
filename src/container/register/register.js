@@ -49,10 +49,10 @@ class Register extends React.Component{
           </List>
           <WhiteSpace />
           <RadioItem
-            checked={this.state.type == 'genius'}
+            checked={this.state.type === 'genius'}
             onClick={()=>this.handleChange('type', 'genius')}>求职者</RadioItem>
           <RadioItem
-            checked={this.state.type == 'boss'}
+            checked={this.state.type === 'boss'}
             onClick={()=>this.handleChange('type', 'boss')}>老板</RadioItem>
           <WhiteSpace />
           <Button type="primary" onClick={this.handleRegister}>注册</Button>
