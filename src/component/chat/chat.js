@@ -18,11 +18,11 @@ class Chat extends React.Component {
     this.state = { text: '', msg: []}
   }
   componentDidMount() {
-    if (!this.props.chat.chatmsg.length) {
-      this.props.getMsgList()
-      this.props.recvMsg()
-    }
-  }
+		if (!this.props.chat.chatmsg.length) {
+			this.props.getMsgList()
+			this.props.recvMsg()
+		}
+	}
   handleSubmit() {
     // 发送事件
     const from = this.props.user._id
@@ -39,7 +39,7 @@ class Chat extends React.Component {
       return null
     }
     const chaid = getChatId(userid, this.props.user._id)
-    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid == chaid)
+    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chaid == chaid)
     return (
       <div id="chat-page">
         <NavBar mode="drak"
@@ -51,7 +51,7 @@ class Chat extends React.Component {
           {users[userid].name}
         </NavBar>
         { chatmsgs.map(v => {
-          const  avatar = require(`../img/${users[v.from].avatar}.png`)
+          const avatar = require(`../img/${users[v.from].avatar}.png`)
           return v.from == userid ? (
             <List key={v._id}>
               <Item
