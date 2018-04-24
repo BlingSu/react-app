@@ -1,9 +1,10 @@
 import React from 'react'
-import { InputItem, List, NavBar } from 'antd-mobile'
+import { InputItem, List, NavBar, Icon } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { getMsgList, sendMsg, recvMsg } from '../../redux/chat.redux'
 
 import io from 'socket.io-client'
+import { getChatId } from '../../util';
 const socket = io('ws://localhost:9999')
 
 @connect(
@@ -31,22 +32,35 @@ class Chat extends React.Component {
     this.setState({text: ''})
   }
   render() {
-    const user = this.props.match.params.user
+    const userid = this.props.match.params.user
     const Item = List.Item
+    const users = this.props.chat.users
+    if (!users[userid]) {
+      return null
+    }
+    const chaid = getChatId(userid, this.props.user._id)
+    const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid == chaid)
     return (
       <div id="chat-page">
-        <NavBar mode="drak">
-          {this.props.match.params.user}
+        <NavBar mode="drak"
+          icon={<Icon type="left" />}
+          onLeftClick={() => {
+            this.props.history.goBack()
+          }}
+          >
+          {users[userid].name}
         </NavBar>
-        { this.props.chat.chatmsg.map(v => {
-          return v.from == user ? (
+        { chatmsgs.map(v => {
+          const  avatar = require(`../img/${users[v.from].avatar}.png`)
+          return v.from == userid ? (
             <List key={v._id}>
               <Item
+              thumb={avatar}
               >{v.content}</Item>
             </List>
           ) : (
             <List key={v._id}>
-              <Item  extra={'avatar'} className="chat-me">{v.content}</Item>
+              <Item  extra={<img src={avatar} />} className="chat-me">{v.content}</Item>
             </List>
           )
         }) }
