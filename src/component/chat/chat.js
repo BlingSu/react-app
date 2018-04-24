@@ -17,11 +17,12 @@ class Chat extends React.Component {
     this.state = { text: '', msg: []}
   }
   componentDidMount() {
-    // this.props.getMsgList()
-    // this.props.recvMsg()
+    if (!this.props.chat.chatmsg.length) {
+      this.props.getMsgList()
+      this.props.recvMsg()
+    }
   }
   handleSubmit() {
-    console.log(this.props)
     // 发送事件
     const from = this.props.user._id
     const to = this.props.match.params.user
