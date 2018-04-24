@@ -2,8 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const model = require('./model')
-
-const User = model.getModel('user')
 const Chat = model.getModel('chat')
 
 const app = express()
@@ -14,7 +12,7 @@ const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
   socket.on('sendmsg', (data) => {
-    // console.log(data)
+    console.log(data)
     // io.emit('recivemsg', data)
     const {from, to, msg} = data
     const chaid = [from, to].sort().join('_')
