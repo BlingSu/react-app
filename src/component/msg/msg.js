@@ -14,14 +14,17 @@ class Msg extends React.Component {
     const Item = List.Item
     const Brief = Item.Brief
     const userid = this.props.user._id
-    console.log(this.props)
     // 根据chatid 分组
     const msgGroup = {}
     this.props.chat.chatmsg.forEach(item => {
       msgGroup[item.chatid] = msgGroup[item.chatid] || []
       msgGroup[item.chatid].push(item)
     })
-    const chatList = Object.values(msgGroup)
+    const chatList = Object.values(msgGroup).sort((pre, next) => {
+      const pre_last = this.getLast(pre).create_time
+      const next_last = this.getLast(next).create_time
+      return next_last - pre_last 
+    })
     return (
       <div>
       <List>
@@ -35,7 +38,11 @@ class Msg extends React.Component {
         const name = this.props.chat.users[targetId].name ? this.props.chat.users[targetId].name : ''
         const avatar = this.props.chat.users[targetId].avatar ? this.props.chat.users[targetId].avatar : ''
           return (
-            <Item 
+            <Item
+              arrow="horizontal"
+              onClick={() => {
+                this.props.history.push(`/chat/${targetId}`)
+              }}
               thumb={require(`../img/${avatar}.png`)} 
               extra={<Badge text={unreadNum}></Badge>}
               key={lastItem._id}>
